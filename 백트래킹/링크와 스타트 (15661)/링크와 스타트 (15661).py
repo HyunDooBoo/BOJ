@@ -2,24 +2,26 @@ import sys
 
 input = sys.stdin.readline
 
-def dfs(depth):
+def dfs():
     global answer
+    start, link = 0, 0
+    for i in range(N):
+        for j in range(N):
+            if visited[i] and visited[j]:
+                start += S[i][j]
+            elif not visited[i] and not visited[j]:
+                link += S[i][j]
+    answer = min(answer, abs(start-link))
+    return
+
+def sol(depth):
     if depth == N:
-        start, link = 0, 0
-        for i in range(N):
-            for j in range(N):
-                if visited[i] and visited[j]:
-                    start += S[i][j]
-                elif not visited[i] and not visited[j]:
-                    link += S[i][j]
-        answer = min(answer, abs(start-link))
+        dfs()
         return
-
-    for i in range(depth, N):
-        visited[i] = True
-        dfs(depth+1)
-        visited[i] = False
-
+    visited[depth] = True
+    sol(depth+1)
+    visited[depth] = False
+    sol(depth+1)
 
 N = int(input().rstrip())
 S = []
@@ -29,9 +31,5 @@ visited = [False] * N
 
 answer = 99999
 
-for i in range(N):
-    visited[i] = True
-    dfs(i)
-    visited[i] = False
-
+sol(0)
 print(answer)
