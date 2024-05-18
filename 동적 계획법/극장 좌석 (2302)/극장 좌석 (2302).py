@@ -18,11 +18,9 @@ answer = 1
 if M > 0:
     tmp = 0
     for i in vips:
-        if i - tmp - 1 >= 0:
-            answer *= dp[i - tmp - 1]
+        answer *= dp[i - tmp - 1]
         tmp = i
-    if N-tmp >= 0:
-        answer *= dp[N-tmp]
+    answer *= dp[N-tmp]
 else:
     answer = dp[N]
 print(answer)
