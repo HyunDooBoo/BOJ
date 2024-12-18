@@ -23,14 +23,14 @@ for student in nums:
                 able.append((i,j,love,empty))
     able.sort(key = lambda x:(-x[2],-x[3],x[0],x[1]))
     seats[able[0][0]][able[0][1]] = student[0]
-student.sort()
+nums.sort()
 for i in range(N):
     for j in range(N):
         count = 0
         for k in range(4):
             nx, ny = i + dx[k], j + dy[k]
             if 0 <= nx < N and 0 <= ny < N:
-                if seats[nx][ny] in student[seats[nx][ny] - 1]:
+                if seats[nx][ny] in nums[seats[i][j] - 1][1:]:
                     count += 1
         answer += score[count]
 print(answer)
